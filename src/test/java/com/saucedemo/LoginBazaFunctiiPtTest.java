@@ -8,98 +8,95 @@ public class LoginBazaFunctiiPtTest extends PaginaDeBaza
 {
     public void apasaButonLogin()
     {
-        // gaseste buton login
-        WebElement butonLogin= driver.findElement(By.id("login-button"));
-        // apasa buton
+        WebElement butonLogin= driver.findElement(By.id(locatorButonLoginByID));
         butonLogin.click();
     }
+
     public void introduParolaSecretSauce()
     {
-        //locatie camp parola
-        WebElement campParola=driver.findElement(By.id("password"));
-        //
-        campParola.sendKeys("secret_sauce");
+        WebElement campParola=driver.findElement(By.id(locatorCampLoginPasswordByID));
+        campParola.sendKeys(password);
     }
     public void introduUsernameStandardUser()
     {
-        //cautare camp username
-        WebElement campUsername=driver.findElement(By.id("user-name"));
-        campUsername.sendKeys("standard_user");
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user1);
     }
     public void introduUsernameLockedOutUser()
     {
-        //cautare camp username
-        WebElement campUsername=driver.findElement(By.id("user-name"));
-        campUsername.sendKeys("locked_out_user");
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user2);
     }
     public void introduUsernameProblemUser()
     {
-        //cautare camp username
-        WebElement campUsername=driver.findElement(By.id("user-name"));
-        campUsername.sendKeys("problem_user");
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user3);
     }
     public void introduUsernamePerformanceGlitchUser()
     {
-        //cautare camp username
-        WebElement campUsername=driver.findElement(By.id("user-name"));
-        campUsername.sendKeys("performance_glitch_user");
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user4);
     }
     public void introduUsernameErrorUser()
     {
-        //cautare camp username
-        WebElement campUsername=driver.findElement(By.id("user-name"));
-        campUsername.sendKeys("error_user");
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user5);
     }
     public void introduUsernameVisualUser()
     {
-        //cautare camp username
-        WebElement campUsername=driver.findElement(By.id("user-name"));
-        campUsername.sendKeys("visual_user");
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user6);
     }
+
     public void introduParolaParolaGresita()
     {
-        //locatie camp parola
-        WebElement campParola=driver.findElement(By.id("password"));
-        //
+        WebElement campParola=driver.findElement(By.id(locatorCampLoginPasswordByID));
         campParola.sendKeys("parola_gresita");
     }
+
     public void  verificareMesajParolaLipsa()
     {
-        WebElement mesajDeEroareParolaLipsa= driver.findElement(By.xpath("//div[@id='login_button_container']//form//h3"));
-        String mesajDeEroareAsteptat="Epic sadface: Password is required";
-        String mesajDeEroareAfisat=mesajDeEroareParolaLipsa.getText();
+        WebElement mesajDeEroare= driver.findElement(By.xpath(locatorCampEroareByXpath));
+        String mesajDeEroareAsteptat=mesajDeEroarePsswordLipsa;
+        String mesajDeEroareAfisat=mesajDeEroare.getText();
         Assert.assertEquals(mesajDeEroareAfisat,mesajDeEroareAsteptat,"mesajul de eroare nu corespunde asteptarilor");
     }
     public void verificareMesajDeEroareUserLipsa()
     {
-        WebElement mesajDeEroare= driver.findElement(By.xpath("//div[@id='login_button_container']//form//h3"));
-        String mesajDeEroareAsteptat="Epic sadface: Username is required";
+        WebElement mesajDeEroare= driver.findElement(By.xpath(locatorCampEroareByXpath));
+        String mesajDeEroareAsteptat=mesajDeEroareUserLipsa;
         String mesajDeEroareAfisat=mesajDeEroare.getText();
         Assert.assertEquals(mesajDeEroareAfisat,mesajDeEroareAsteptat,"mesajul de eroare nu corespunde asteptarilor");
     }
-
     public void verificareLogareButonMeniu()
     {
-        WebElement butonMeniu=driver.findElement(By.xpath("/html//button[@id='react-burger-menu-btn']"));
+        WebElement butonMeniu=driver.findElement(By.xpath(locatorButonMeniuStangaSusByXpath));
         assert butonMeniu.isDisplayed();
     }
     public void verificareMesajDeEroareUserBlocat()
     {
-    WebElement mesajDeEroare= driver.findElement(By.xpath("//div[@id='login_button_container']//form//h3"));
-    String mesajDeEroareAsteptat="Epic sadface: Sorry, this user has been locked out.";
+    WebElement mesajDeEroare= driver.findElement(By.xpath(locatorCampEroareByXpath));
+    String mesajDeEroareAsteptat=mesajDeEroareUserInchis;
     String mesajDeEroareAfisat=mesajDeEroare.getText();
     Assert.assertEquals(mesajDeEroareAfisat,mesajDeEroareAsteptat,"mesajul de eroare nu corespunde asteptarilor");
     }
-    public void apasareButonMeniu()
-    {
-        WebElement butonMeniu=driver.findElement(By.xpath("/html//button[@id='react-burger-menu-btn']"));
-        butonMeniu.click();
-    }
     public void  verificareMesajParolaGresita()
     {
-        WebElement mesajDeEroareParolaLipsa = driver.findElement(By.xpath("//div[@id='login_button_container']//form//h3"));
-        String mesajDeEroareAsteptat = "Epic sadface: Username and password do not match any user in this service";
+        WebElement mesajDeEroareParolaLipsa = driver.findElement(By.xpath(locatorCampEroareByXpath));
+        String mesajDeEroareAsteptat = mesajDeEroareParolaGresita;
         String mesajDeEroareAfisat = mesajDeEroareParolaLipsa.getText();
         Assert.assertEquals(mesajDeEroareAfisat, mesajDeEroareAsteptat, "mesajul de eroare nu corespunde asteptarilor");
     }
+    public void apasareButonMeniu()
+    {
+        WebElement butonMeniu=driver.findElement(By.xpath(locatorButonMeniuStangaSusByXpath));
+        butonMeniu.click();
+    }
+
+    public void introduUserDefinitInPaginaDeBaza()
+    {
+        WebElement campUsername=driver.findElement(By.id(locatorCampLoginUserByID));
+        campUsername.sendKeys(user);
+    }
+
 }
